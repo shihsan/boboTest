@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+<title>QRcode of IP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>
+</head>
+<script type="text/javascript">  
+
+    window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+    //var socket;  // WebSocket Client
+
+    // socket.binaryType = 'arraybuffer';
+
+    $(document).ready(function() {
+     SetupWebSocket();
+    });
+
+    // 連線至提供資料的WebSocket
+    function SetupWebSocket()
+    {
+     var host = 'ws://192.168.1.104:5000';
+     var socket = new WebSocket(host,'echo-protocol');
+
+     socket.onopen = function(e) { 
+      $('#ShowTime').html('Connect to Server!');
+      console.log("Connect to Server!");
+     };
+
+     // 接收訊息
+     socket.onmessage = function(e) {
+      // $('#ShowTime').html(e.data);
+      // console.log(e.data);
+
+      // var arrayBuffer = e.data;
+      //   var bytes = new Uint8Array(arrayBuffer);
+
+        var image = document.getElementById('Image');
+        image.src = 'data:image/png;base64,'+e.data;
+
+        //document.getElementById('qrcode').style.display = "none";
+        document.getElementById('ImageDiv').style.display = "block";
+
+        console.log("receive message.");
+
+     };
+
+     socket.onclose = function(e) {
+      //alert('Disconnected - status ' + this.readyState);
+      console.log("Disconnected.");
+     };
+
+    }
+
+	/*----Websocket Client----*/
+	/*var connection = new WebSocket('ws://192.168.43.249:8000');//ws://html5rocks.websocket.org/echo
+	// When the connection is open, send some data to the server
+	connection.onopen = function () {
+		console.log('Open');
+	  connection.send('Ping'); // Send the message 'Ping' to the server
+	};
+
+	// Log errors
+	connection.onerror = function (error) {
+	  console.log('WebSocket Error ' + error);
+	};
+
+	// Log messages from the server
+	connection.onmessage = function (e) {
+	  console.log('Server: ' + e.data);
+	};  
+    */
+
+    /*var ws = null;    
+    function startServer() {    
+        var url = "ws://127.0.0.1:8000";    
+        if ('WebSocket' in window) {    
+            ws = new WebSocket(url);    
+        } else if ('MozWebSocket' in window) {    
+            ws = new MozWebSocket(url);    
+        } else {    
+            alert('浏览器不支持');    
+            return;  
+        }    
+        ws.onopen = function() {    
+            alert('Opened!');    
+        };    
+        // 收到服务器发送的文本消息, event.data表示文本内容    
+        ws.onmessage = function(event) {    
+            alert('Receive message: ' + event.data);    
+        };    
+        ws.onclose = function() {    
+          alert('Closed!');    
+        }    
+}    
+    //发送信息    
+    function sendMessage(){    
+        var textMessage=document.getElementById("textMessage").value;    
+            
+        if(ws!=null&&textMessage!=""){    
+            ws.send(textMessage);    
+                
+        }    
+    } */   
+</script>
+<body>
+</br>HIHIHIHIHIHIHIHI
+
+<div id="ShowTime" Style="font-size:24px"></div>
+<!-- <input id="text" type="text" value="%%IP%%" style="width:80%" /><br /> -->
+<!--div id="qrcode" style="width:300px; height:300px; margin:50px auto; display:block;"></div-->
+
+<div id="ImageDiv" style="margin:50px auto; display:none;">
+  <img id="Image" alt="pic" style="max-width:1000px; height:auto;"/><!--src="http://ppt.cc/ARHl"-->
+</div>
+
+<!--script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
+<script type="text/javascript">
+//alert(myip);
+
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	width : 300,
+	height : 300
+});
+
+function makeCode () {	
+	var elText = myip;//document.getElementById("text");
+	if (!elText/*.value*/) {
+		alert("Input a text");
+		//elText.focus();
+		return;
+	}
+	
+	qrcode.makeCode(elText/*.value*/);
+}
+
+makeCode();
+//$('#Image').innerHTML = "<img src=\"" + http://ppt.cc/ARHl + "\">";
+
+// $("#text").
+// 	on("blur", function () {
+// 		makeCode();
+// 	}).
+// 	on("keydown", function (e) {
+// 		if (e.keyCode == 13) {
+// 			makeCode();
+// 		}
+// 	});
+</script-->
+<!--script language="JavaScript" src="http://scripts.hashemian.com/js/visitorIPHOST.js.php">
+</script-->
+</body>
