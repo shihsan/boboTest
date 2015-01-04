@@ -22,7 +22,7 @@
     // 連線至提供資料的WebSocket
     function SetupWebSocket()
     {
-     var host = 'ws://192.168.43.249:5000';
+     var host = 'ws://192.168.1.102:5000';
      var socket = new WebSocket(host,'echo-protocol');
 
      socket.onopen = function(e) { 
@@ -45,6 +45,7 @@
         document.getElementById('ImageDiv').style.display = "block";
 
         console.log("receive message.");
+        socket.send("receive message.");
 
      };
 
